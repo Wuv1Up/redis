@@ -28,6 +28,10 @@
  * POSSIBILITY OF SUCH DAMAGE.
  */
 
+/**
+ *  Redis 底层实现 -- 对象
+ */
+
 #include "server.h"
 #include <math.h>
 #include <ctype.h>

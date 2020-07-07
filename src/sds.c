@@ -30,6 +30,14 @@
  * POSSIBILITY OF SUCH DAMAGE.
  */
 
+
+/**
+ *  简单动态字符串(Simple Dynamic Strings), C字符串只会作为字面量,用来打印日志的一些地方, printf("Redis is now ready to exit...");
+ * 对于非字面量字符串, 则使用SDS来标识.
+ * 
+ *  SDS 用于存储 字符串 整型数据.
+*/
+
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
@@ -89,22 +97,29 @@ static inline char sdsReqType(size_t string_size) {
 sds sdsnewlen(const void *init, size_t initlen) {
     void *sh;
     sds s;
+    // 根据传入的字符串选择不同的头类型
     char type = sdsReqType(initlen);
     /* Empty strings are usually created in order to append. Use type 8
      * since type 5 is not good at this. */
     if (type == SDS_TYPE_5 && initlen == 0) type = SDS_TYPE_8;
+    // 获取头部的长度
     int hdrlen = sdsHdrSize(type);
+    // 定义 flags 指针
     unsigned char *fp; /* flags pointer. */
 
+    // 初始化 sds 结构体
     sh = s_malloc(hdrlen+initlen+1);
     if (sh == NULL) return NULL;
     if (init==SDS_NOINIT)
         init = NULL;
     else if (!init)
-        memset(sh, 0, hdrlen+initlen+1);
+        memset(sh, 0, hdrlen+initlen+1); // 将结构体全部置为0
+    // 获取 buf 的偏移(首地址)
     s = (char*)sh+hdrlen;
+    // 获取 flags 的偏移(首地址, 每一个地址对应8位, 1个字节)
     fp = ((unsigned char*)s)-1;
     switch(type) {
+        // 通过 | 位运算, 给 flags 分配值
         case SDS_TYPE_5: {
             *fp = type | (initlen << SDS_TYPE_BITS);
             break;

@@ -27,6 +27,10 @@
  * POSSIBILITY OF SUCH DAMAGE.
  */
 
+/**
+ * Redis底层数据结构 -- 字典(t_hash.c)
+ */
+
 #include "server.h"
 #include <math.h>
 

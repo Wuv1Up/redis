@@ -27,6 +27,10 @@
  * POSSIBILITY OF SUCH DAMAGE.
  */
 
+/**
+ * Redis数据类型底层实现 -- 字符串
+ */
+
 #include "server.h"
 #include <math.h> /* isnan(), isinf() */
 

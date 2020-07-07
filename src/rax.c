@@ -30,6 +30,10 @@
  * POSSIBILITY OF SUCH DAMAGE.
  */
 
+/**
+ * Streams的底层结构 listpack.c 和 rax.c
+ */
+
 #include <stdlib.h>
 #include <string.h>
 #include <assert.h>

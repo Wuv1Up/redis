@@ -32,6 +32,11 @@
  * POSSIBILITY OF SUCH DAMAGE.
  */
 
+
+/**
+ *  Streams 底层的实现有listpack.c 和 rax.c
+*/
+
 #include <stdint.h>
 #include <limits.h>
 #include <sys/types.h>

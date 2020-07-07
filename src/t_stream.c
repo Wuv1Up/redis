@@ -27,6 +27,10 @@
  * POSSIBILITY OF SUCH DAMAGE.
  */
 
+/**
+ * Redis 底层数据类型 -- 数据流 t_stream.c
+ */
+
 #include "server.h"
 #include "endianconv.h"
 #include "stream.h"

@@ -28,6 +28,10 @@
  * POSSIBILITY OF SUCH DAMAGE.
  */
 
+/**
+ * 字典, 符号表, 关联数组, 映射. 用于保存键值对的抽象数据结构.
+ */
+
 #include <string.h> /* for memcpy */
 #include "quicklist.h"
 #include "zmalloc.h"

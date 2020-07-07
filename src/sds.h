@@ -45,9 +45,17 @@ typedef char *sds;
 /* Note: sdshdr5 is never used, we just access the flags byte directly.
  * However is here to document the layout of type 5 SDS strings. */
 struct __attribute__ ((__packed__)) sdshdr5 {
+    // 低三位确定类型, 高五位确定字符串长度(5位 2^5-1= 31 31个字符长度). type 确定什么类型(是采用哪个头)... 超过31个字符的需要用其他结构.
     unsigned char flags; /* 3 lsb of type, and 5 msb of string length */
+    // 柔性数组, 只能放在结构体末尾. 
     char buf[];
 };
+
+/**
+ * len      已占用字节数
+ * alloc    分配的总字节数
+ * flags    低三位用作类型标识, 高五位预留
+ */
 struct __attribute__ ((__packed__)) sdshdr8 {
     uint8_t len; /* used */
     uint8_t alloc; /* excluding the header and null terminator */

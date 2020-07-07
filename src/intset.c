@@ -28,12 +28,17 @@
  * POSSIBILITY OF SUCH DAMAGE.
  */
 
+/**
+ * 整数集合, 用于有序、无重复地保存多个整数值,根据元素的值,自动选择该用什么长度的整数类型来保存元素.
+ */
+
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
 #include "intset.h"
 #include "zmalloc.h"
 #include "endianconv.h"
+
 
 /* Note that these encodings are ordered, so:
  * INTSET_ENC_INT16 < INTSET_ENC_INT32 < INTSET_ENC_INT64. */
