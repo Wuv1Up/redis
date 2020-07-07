@@ -66,6 +66,7 @@
 /*-----------------------------------------------------------------------------
  * Skiplist implementation of the low level API
  *----------------------------------------------------------------------------*/
+// 跳跃表实现的底层API
 
 int zslLexValueGteMin(sds value, zlexrangespec *spec);
 int zslLexValueLteMax(sds value, zlexrangespec *spec);

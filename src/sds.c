@@ -49,6 +49,9 @@
 
 const char *SDS_NOINIT = "SDS_NOINIT";
 
+/**
+ *   通过 flags 的低三位确定头部类型, 继而确定头部大小
+ */
 static inline int sdsHdrSize(char type) {
     switch(type&SDS_TYPE_MASK) {
         case SDS_TYPE_5:
@@ -177,6 +180,12 @@ sds sdsdup(const sds s) {
 }
 
 /* Free an sds string. No operation is performed if 's' is NULL. */
+/**
+ *  s 表示 buf 的起始字节地址.
+ *  s[-1] 寻找到flags.
+ *  sdsHdrSize(flags) 通过 flags 返回头部的大小.
+ *  s - 头部的大小 ==> sds 的起始字节位置
+ */
 void sdsfree(sds s) {
     if (s == NULL) return;
     s_free((char*)s-sdsHdrSize(s[-1]));
@@ -205,6 +214,9 @@ void sdsupdatelen(sds s) {
  * However all the existing buffer is not discarded but set as free space
  * so that next append operations will not require allocations up to the
  * number of bytes previously available. */
+/**
+ *  不直接释放内存, 通过重置buf的长度而达到清空的目的.
+ */
 void sdsclear(sds s) {
     sdssetlen(s, 0);
     s[0] = '\0';
@@ -432,6 +444,9 @@ sds sdscat(sds s, const char *t) {
  *
  * After the call, the modified sds string is no longer valid and all the
  * references must be substituted with the new pointer returned by the call. */
+/**
+ * 将字符串t 拼接到 字符串s之后.
+ */
 sds sdscatsds(sds s, const sds t) {
     return sdscatlen(s, t, sdslen(t));
 }
